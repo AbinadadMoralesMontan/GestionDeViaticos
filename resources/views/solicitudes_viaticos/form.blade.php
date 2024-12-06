@@ -8,9 +8,11 @@
 
         <label for="solicitud_comision_id">Comisión Asociada:</label>
         <select id="solicitud_comision_id" name="solicitud_comision_id" class="form-control" required>
+            <option value="">Seleccione una comisión</option>
             @foreach ($comisiones as $comision)
-                <option value="{{ $comision->id }}" {{ old('solicitud_comision_id', $viatico->solicitud_comision_id ?? '') == $comision->id ? 'selected' : '' }}>
-                    {{ $comision->motivo }}
+                <option value="{{ $comision->id }}" 
+                    {{ old('solicitud_comision_id', $viatico->solicitud_comision_id ?? '') == $comision->id ? 'selected' : '' }}>
+                    [{{ $comision->fecha_solicitud }} - {{ $comision->fecha_salida }} - {{ $comision->fecha_regreso }}] {{ $comision->motivo }}
                 </option>
             @endforeach
         </select>

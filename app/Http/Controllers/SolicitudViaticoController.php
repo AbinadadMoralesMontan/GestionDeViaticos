@@ -7,8 +7,8 @@ use App\Models\SolicitudComision;
 use App\Models\AprobacionFiscalizacion;
 use App\Models\AprobacionTesoreria;
 use App\Models\ComprobanteEntregado;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitudViaticoController extends Controller
 {
@@ -17,13 +17,23 @@ class SolicitudViaticoController extends Controller
         return view('solicitudes_viaticos.index', compact('viaticos'));
     }
 
+
     public function create(){
-        $comisiones = SolicitudComision::all(); // Cargar comisiones para asociar
+        $user = auth()->user();
+    
+        if ($user->rol->nombre === 'Administrador') {
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')->get();
+        } else {
+            $comisionesQuery = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+                ->where('responsable_id', Auth::id());
+    
+            $comisiones = $comisionesQuery->get();
+        }
+    
         return view('solicitudes_viaticos.create', compact('comisiones'));
     }
-
-    public function store(Request $request)
-    {
+    
+    public function store(Request $request){
         $request->validate([
             'solicitud_comision_id' => 'required|exists:solicitudes_comision,id',
             'monto_solicitado' => 'required|numeric|min:0',
@@ -39,24 +49,23 @@ class SolicitudViaticoController extends Controller
         AprobacionFiscalizacion::create([
             'solicitud_viatico_id' => $viatico->id,
             'estado' => 'Pendiente',
-            'fiscalizador_id' => null, // Será asignado posteriormente
+            'fiscalizador_id' => null, 
         ]);
 
         // Insertar en aprobaciones_tesoreria
         AprobacionTesoreria::create([
             'solicitud_viaticos_id' => $viatico->id,
             'estado' => 'Pendiente',
-            'monto_aprobado' => null, // Será asignado posteriormente
+            'monto_aprobado' => null, 
         ]);
 
-        // Insertar un comprobante vacío inicial (opcional)
         ComprobanteEntregado::create([
             'solicitud_viaticos_id' => $viatico->id,
-            'categoria_gasto' => 'Sin Categoría', // Predeterminado
-            'nombre_archivo' => null, // Se asignará posteriormente
-            'tipo_archivo' => null, // Se asignará posteriormente
-            'contenido' => null, // Se asignará posteriormente
-            'observaciones' => null, // Opcional
+            'categoria_gasto' => 'Sin Categoría', 
+            'nombre_archivo' => null, 
+            'tipo_archivo' => null, 
+            'contenido' => null, 
+            'observaciones' => null, 
         ]);
 
         return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de viáticos creada exitosamente.');
@@ -64,14 +73,21 @@ class SolicitudViaticoController extends Controller
 
 
 
-    public function edit(SolicitudViatico $viatico)
-    {
-        $comisiones = SolicitudComision::all();
+    public function edit(SolicitudViatico $viatico){
+        $user = auth()->user();
+        if ($user->rol->nombre === 'Administrador') {
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+                ->get();
+        } else {
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+                ->where('responsable_id', Auth::id())
+                ->get();
+        }
+
         return view('solicitudes_viaticos.edit', compact('viatico', 'comisiones'));
     }
 
-    public function update(Request $request, SolicitudViatico $viatico)
-    {
+    public function update(Request $request, SolicitudViatico $viatico){
         $request->validate([
             'solicitud_comision_id' => 'required|exists:solicitudes_comision,id',
             'monto_solicitado' => 'required|numeric|min:0',
@@ -84,8 +100,7 @@ class SolicitudViaticoController extends Controller
         return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de Viático actualizada exitosamente.');
     }
 
-    public function destroy(SolicitudViatico $viatico)
-    {
+    public function destroy(SolicitudViatico $viatico){
         $viatico->delete();
         return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de Viático eliminada exitosamente.');
     }

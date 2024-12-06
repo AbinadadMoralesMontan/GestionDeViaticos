@@ -24,15 +24,17 @@ class SolicitudComision extends Model
         'observaciones',
     ];
 
-    public function responsable()
-    {
+    public function responsable(){
         return $this->belongsTo(Usuario::class, 'responsable_id', 'idUsuario');
     }
 
-    public function solicitudesViaticos()
-{
-    return $this->hasMany(SolicitudViatico::class, 'solicitud_comision_id');
-}
+    public function solicitudesViaticos(){
+        return $this->hasMany(SolicitudViatico::class, 'solicitud_comision_id');
+    }
 
+
+    public function usuario(){
+        return $this->belongsTo(Usuario::class, 'responsable_id');
+    }
 
 }
