@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\SolicitudViatico;
 use App\Models\SolicitudComision;
+use App\Models\AprobacionFiscalizacion;
+use App\Models\AprobacionTesoreria;
+use App\Models\ComprobanteEntregado;
+
 use Illuminate\Http\Request;
 
 class SolicitudViaticoController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $viaticos = SolicitudViatico::with('solicitudComision')->paginate(10);
         return view('solicitudes_viaticos.index', compact('viaticos'));
     }
 
-    public function create()
-    {
+    public function create(){
         $comisiones = SolicitudComision::all(); // Cargar comisiones para asociar
         return view('solicitudes_viaticos.create', compact('comisiones'));
     }
@@ -30,9 +32,37 @@ class SolicitudViaticoController extends Controller
             'tipo' => 'required|in:Devengada,Anticipada',
         ]);
 
-        SolicitudViatico::create($request->all());
-        return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de Viático creada exitosamente.');
+        // Crear la solicitud de viático
+        $viatico = SolicitudViatico::create($request->all());
+
+        // Insertar en aprobaciones_fiscalizacion
+        AprobacionFiscalizacion::create([
+            'solicitud_viatico_id' => $viatico->id,
+            'estado' => 'Pendiente',
+            'fiscalizador_id' => null, // Será asignado posteriormente
+        ]);
+
+        // Insertar en aprobaciones_tesoreria
+        AprobacionTesoreria::create([
+            'solicitud_viaticos_id' => $viatico->id,
+            'estado' => 'Pendiente',
+            'monto_aprobado' => null, // Será asignado posteriormente
+        ]);
+
+        // Insertar un comprobante vacío inicial (opcional)
+        ComprobanteEntregado::create([
+            'solicitud_viaticos_id' => $viatico->id,
+            'categoria_gasto' => 'Sin Categoría', // Predeterminado
+            'nombre_archivo' => null, // Se asignará posteriormente
+            'tipo_archivo' => null, // Se asignará posteriormente
+            'contenido' => null, // Se asignará posteriormente
+            'observaciones' => null, // Opcional
+        ]);
+
+        return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de viáticos creada exitosamente.');
     }
+
+
 
     public function edit(SolicitudViatico $viatico)
     {

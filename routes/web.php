@@ -8,6 +8,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\SolicitudComisionController;
 use App\Http\Controllers\SolicitudViaticoController;
+use App\Http\Controllers\AprobacionFiscalizacionController;
+use App\Http\Controllers\AprobacionTesoreriaController;
 
 Route::get('/', [AuthController::class, 'mostrarFormularioLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -63,6 +65,14 @@ Route::post('viaticos', [SolicitudViaticoController::class, 'store'])->name('sol
 Route::get('viaticos/{viatico}/edit', [SolicitudViaticoController::class, 'edit'])->name('solicitudes_viaticos.edit');
 Route::put('viaticos/{viatico}', [SolicitudViaticoController::class, 'update'])->name('solicitudes_viaticos.update');
 Route::delete('viaticos/{viatico}', [SolicitudViaticoController::class, 'destroy'])->name('solicitudes_viaticos.destroy');
+
+Route::get('aprobaciones-fiscalizacion', [AprobacionFiscalizacionController::class, 'index'])->name('aprobaciones_fiscalizacion.index');
+Route::get('aprobaciones-fiscalizacion/{id}/edit', [AprobacionFiscalizacionController::class, 'edit'])->name('aprobaciones_fiscalizacion.edit');
+Route::put('aprobaciones-fiscalizacion/{id}', [AprobacionFiscalizacionController::class, 'update'])->name('aprobaciones_fiscalizacion.update');
+
+Route::get('aprobaciones-tesoreria', [AprobacionTesoreriaController::class, 'index'])->name('aprobaciones_tesoreria.index');
+Route::get('aprobaciones-tesoreria/{id}/edit', [AprobacionTesoreriaController::class, 'edit'])->name('aprobaciones_tesoreria.edit');
+Route::put('aprobaciones-tesoreria/{id}', [AprobacionTesoreriaController::class, 'update'])->name('aprobaciones_tesoreria.update');
 
     });
 
