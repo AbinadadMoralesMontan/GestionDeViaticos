@@ -10,12 +10,26 @@ use App\Models\ComprobanteEntregado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SolicitudViaticoController extends Controller
-{
+class SolicitudViaticoController extends Controller{
+    
     public function index(){
-        $viaticos = SolicitudViatico::with('solicitudComision')->paginate(10);
+        $user = auth()->user();
+
+        if ($user->rol->nombre === 'Administrador') {
+            $viaticos = SolicitudViatico::with('solicitudComision')
+                ->where('estado', 'Pendiente')
+                ->paginate(10);
+        } else {
+            $viaticos = SolicitudViatico::with('solicitudComision')
+                ->whereHas('solicitudComision', function ($query) use ($user) {
+                    $query->where('responsable_id',  Auth::id());
+                })
+                ->paginate(10);
+        }
+
         return view('solicitudes_viaticos.index', compact('viaticos'));
     }
+
 
 
     public function create(){
@@ -42,7 +56,6 @@ class SolicitudViaticoController extends Controller
             'tipo' => 'required|in:Devengada,Anticipada',
         ]);
 
-        // Crear la solicitud de viático
         $viatico = SolicitudViatico::create($request->all());
 
         // Insertar en aprobaciones_fiscalizacion
