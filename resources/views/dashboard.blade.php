@@ -11,7 +11,8 @@
             <a href="{{ route('solicitudes.index') }}" class="dashboard-option">SOLICITUDES</a>
             <a href="{{ route('solicitudes_viaticos.index') }}" class="dashboard-option">SOLICITUDES DE VIATICOS</a>
             <a href="{{ route('aprobaciones_fiscalizacion.index') }}" class="dashboard-option">APROBACIONES FISCALIZACIÓN</a>
-            <a href="{{ route('aprobaciones_tesoreria.index') }}" class="dashboard-option">APROBACIONES TESORERIA</a>        
+            <a href="{{ route('aprobaciones_tesoreria.index') }}" class="dashboard-option">APROBACIONES TESORERIA</a> 
+            <a href="{{ route('comprobantes.index') }}" class="dashboard-option">COMPROBANTES ENTREGADOS</a>       
         </div>
     </div>
 @endsection

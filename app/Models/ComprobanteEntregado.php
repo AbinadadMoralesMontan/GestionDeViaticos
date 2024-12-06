@@ -18,8 +18,14 @@ class ComprobanteEntregado extends Model
         'tipo_archivo',
         'contenido',
         'observaciones',
+        'pdf',
+         'xml',
     ];
 
     public $timestamps = false;
+
+    public function solicitudViatico(){
+        return $this->belongsTo(SolicitudViatico::class, 'solicitud_viaticos_id');
+    }
 
 }

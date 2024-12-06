@@ -10,6 +10,7 @@ use App\Http\Controllers\SolicitudComisionController;
 use App\Http\Controllers\SolicitudViaticoController;
 use App\Http\Controllers\AprobacionFiscalizacionController;
 use App\Http\Controllers\AprobacionTesoreriaController;
+use App\Http\Controllers\ComprobanteEntregadoController;
 
 Route::get('/', [AuthController::class, 'mostrarFormularioLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -73,6 +74,13 @@ Route::put('aprobaciones-fiscalizacion/{id}', [AprobacionFiscalizacionController
 Route::get('aprobaciones-tesoreria', [AprobacionTesoreriaController::class, 'index'])->name('aprobaciones_tesoreria.index');
 Route::get('aprobaciones-tesoreria/{id}/edit', [AprobacionTesoreriaController::class, 'edit'])->name('aprobaciones_tesoreria.edit');
 Route::put('aprobaciones-tesoreria/{id}', [AprobacionTesoreriaController::class, 'update'])->name('aprobaciones_tesoreria.update');
+
+Route::get('comprobantes', [ComprobanteEntregadoController::class, 'index'])->name('comprobantes.index');
+Route::get('comprobantes/{id}/edit', [ComprobanteEntregadoController::class, 'edit'])->name('comprobantes.edit');
+Route::put('comprobantes/{id}', [ComprobanteEntregadoController::class, 'update'])->name('comprobantes.update');
+Route::get('comprobantes/{id}/download-pdf', [ComprobanteEntregadoController::class, 'downloadPdf'])->name('comprobantes.downloadPdf');
+Route::get('comprobantes/{id}/download-xml', [ComprobanteEntregadoController::class, 'downloadXml'])->name('comprobantes.downloadXml');
+Route::get('comprobantes/{id}/view-pdf', [ComprobanteEntregadoController::class, 'viewPdf'])->name('comprobantes.viewPdf');
 
     });
 
