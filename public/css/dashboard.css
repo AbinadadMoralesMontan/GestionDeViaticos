@@ -1,0 +1,216 @@
+/* dashboard.css */
+
+/* General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #730f25 !important; /* Asegura que el fondo sea burdeos */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+/* Header y Footer */
+.header,
+.footer {
+    background-color: #f9c42b;
+    color: #730f25;
+    text-align: left;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header img {
+    height: 40px;
+}
+
+.header h1,
+.footer h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+}
+
+/* Dashboard */
+.dashboard-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.dashboard-container h1 {
+    font-size: 28px;
+    color: #f9c42b;
+    margin-bottom: 20px;
+}
+
+.dashboard-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.dashboard-option {
+    background-color: #4a1a2f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none !important; /* Elimina el subrayado */
+    display: block;
+}
+
+.dashboard-option:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white; /* Asegura que el texto no cambie de color al pasar el mouse */
+}
+
+.dashboard-option:active {
+    transform: scale(0.95);
+}
+
+
+.dashboard-option:focus {
+    color: white !important; /* Elimina el color azul al enfocarse */
+    outline: none; /* Quita el contorno azul */
+}
+
+@media (max-width: 480px) {
+    .dashboard-container h1 {
+        font-size: 24px;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #4a1a2f;
+    color: white;
+}
+
+.action-button {
+    background-color: #f9c42b; /* Amarillo */
+    color: #730f25; /* Burdeos */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.action-button:hover {
+    background-color: #d4a920;
+}
+
+.action-button.delete {
+    background-color: #e63946; /* Rojo para desactivar */
+    color: white;
+}
+
+.action-button.delete:hover {
+    background-color: #c53030;
+}
+
+.form-container {
+    background-color: #4a1a2f;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.form-container h1 {
+    text-align: center;
+    color: #f9c42b;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-container button {
+    background-color: #f9c42b;
+    color: #730f25;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #d4a920;
+}
+
+.action-button.activate {
+    background-color: #4CAF50; /* Verde para reactivar */
+    color: white;
+}
+
+.action-button.activate:hover {
+    background-color: #45a049;
+
+}
+
+
+
+/* Asegurar altura consistente */
+.input-group .form-control {
+    height: 45px; /* Altura fija para el input */
+}
+
+.input-group .btn {
+    height: 45px; /* Igualar la altura del botón al input */
+    padding: 0 10px;
+}
+
+.input-group .btn i {
+    font-size: 18px; /* Tamaño del ícono */
+    color: white; /* Color del ícono */
+}
+
+.input-group .btn:hover {
+    background-color: #d4a920; /* Fondo amarillo más oscuro al pasar el mouse */
+}
