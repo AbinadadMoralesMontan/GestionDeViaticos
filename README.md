@@ -1,4 +1,4 @@
-# Prueba Técnica Marco Antonio Ramirez Valencia
+# Examen Final Abinadad Morales Montan & Ángel Daniel López Vazquez
 **Herramientas utilizadas:**
 
  - IDE: Visual Studio Code
