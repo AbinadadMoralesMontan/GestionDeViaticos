@@ -21,12 +21,17 @@
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" class="form-control" required>{{ old('descripcion', $viatico->descripcion ?? '') }}</textarea>
 
-        <label for="estado">Estado:</label>
-        <select id="estado" name="estado" class="form-control" required>
-            <option value="Pendiente" {{ old('estado', $viatico->estado ?? '') == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-            <option value="Aprobada" {{ old('estado', $viatico->estado ?? '') == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
-            <option value="Rechazada" {{ old('estado', $viatico->estado ?? '') == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
-        </select>
+        @if (auth()->user()->rol->nombre === 'Administrador')
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" class="form-control" required>
+                <option value="Pendiente" {{ old('estado', $viatico->estado ?? '') == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="Aprobada" {{ old('estado', $viatico->estado ?? '') == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
+                <option value="Rechazada" {{ old('estado', $viatico->estado ?? '') == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
+            </select>
+        @else
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado" class="form-control" readonly value="{{ $viatico->estado ?? 'Pendiente' }}">
+        @endif
 
         <label for="tipo">Tipo:</label>
         <select id="tipo" name="tipo" class="form-control" required>

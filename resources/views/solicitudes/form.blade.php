@@ -26,6 +26,16 @@
         <label for="observaciones">Observaciones:</label>
         <textarea id="observaciones" name="observaciones" class="form-control" placeholder="Ingrese observaciones adicionales">{{ old('observaciones', $solicitud->observaciones ?? '') }}</textarea>
 
+        <!-- Estado (Solo para Administradores y en modo edición) -->
+        @if (isset($solicitud) && auth()->user()->rol->nombre === 'Administrador')
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" class="form-control">
+                <option value="Pendiente" {{ old('estado', $solicitud->estado ?? '') == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="Aprobada" {{ old('estado', $solicitud->estado ?? '') == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
+                <option value="Rechazada" {{ old('estado', $solicitud->estado ?? '') == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
+            </select>
+        @endif
+
         <!-- Botón Guardar -->
         <button type="submit" class="btn btn-primary btn-block">{{ isset($solicitud) ? 'Actualizar' : 'Guardar' }}</button>
     </form>

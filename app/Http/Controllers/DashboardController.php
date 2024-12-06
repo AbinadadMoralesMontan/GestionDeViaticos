@@ -17,7 +17,7 @@ class DashboardController extends Controller{
         if ($userRole === 'administrador') {
             $dashboardOptions = [
                 ['route' => 'usuarios.index', 'label' => 'USUARIOS'],
-                ['route' => 'solicitudes.index', 'label' => 'SOLICITUDES'],
+                ['route' => 'solicitudes.index', 'label' => 'SOLICITUDES DE COMISIÓN'],
                 ['route' => 'solicitudes_viaticos.index', 'label' => 'SOLICITUDES DE VIÁTICOS'],
                 ['route' => 'aprobaciones_fiscalizacion.index', 'label' => 'APROBACIONES FISCALIZACIÓN'],
                 ['route' => 'aprobaciones_tesoreria.index', 'label' => 'APROBACIONES TESORERÍA'],
@@ -35,7 +35,7 @@ class DashboardController extends Controller{
             ];
         } elseif ($userRole === 'empleado') {
             $dashboardOptions = [
-                ['route' => 'solicitudes.index', 'label' => 'SOLICITUDES'],
+                ['route' => 'solicitudes.index', 'label' => 'SOLICITUDES DE COMISIÓN'],
                 ['route' => 'solicitudes_viaticos.index', 'label' => 'SOLICITUDES DE VIÁTICOS'],
                 ['route' => 'comprobantes.index', 'label' => 'COMPROBANTES ENTREGADOS'],
             ];
