@@ -41,14 +41,14 @@ Route::middleware('auth')->group(function () {
     });
 
     // Grupo específico para fiscalización
-    Route::middleware('role:fiscalizacion')->group(function () {
+    Route::middleware('role:fiscalizacion,administrador')->group(function () {
         Route::get('aprobaciones-fiscalizacion', [AprobacionFiscalizacionController::class, 'index'])->name('aprobaciones_fiscalizacion.index');
         Route::get('aprobaciones-fiscalizacion/{id}/edit', [AprobacionFiscalizacionController::class, 'edit'])->name('aprobaciones_fiscalizacion.edit');
         Route::put('aprobaciones-fiscalizacion/{id}', [AprobacionFiscalizacionController::class, 'update'])->name('aprobaciones_fiscalizacion.update');        
     });
 
     // Grupo específico para tesorería
-    Route::middleware('role:tesoreria')->group(function () {
+    Route::middleware('role:tesoreria,administrador')->group(function () {
         Route::get('aprobaciones-tesoreria', [AprobacionTesoreriaController::class, 'index'])->name('aprobaciones_tesoreria.index');
         Route::get('aprobaciones-tesoreria/{id}/edit', [AprobacionTesoreriaController::class, 'edit'])->name('aprobaciones_tesoreria.edit');
         Route::put('aprobaciones-tesoreria/{id}', [AprobacionTesoreriaController::class, 'update'])->name('aprobaciones_tesoreria.update');
