@@ -19,8 +19,8 @@ class MovimientoController extends Controller
     // Mostrar el historial de movimientos
     public function index(Request $request)
     {
-        // Solo Administrador puede ver el historial
-        if (Auth::user()->idRol != 1) {
+        // Solo Rectoria puede ver el historial
+        if (Auth::user()->id_rol != 1) {
             return redirect()->route('dashboard')->with('error', 'No tienes permiso para acceder al historial.');
         }
 
@@ -40,7 +40,7 @@ class MovimientoController extends Controller
     public function crearSalida()
     {
         // Solo Almacenista puede acceder
-        if (Auth::user()->idRol != 2) {
+        if (Auth::user()->id_rol != 2) {
             return redirect()->route('dashboard')->with('error', 'No tienes permiso para realizar salidas.');
         }
 
@@ -52,7 +52,7 @@ class MovimientoController extends Controller
     public function guardarSalida(Request $request)
     {
         // Solo Almacenista puede realizar
-        if (Auth::user()->idRol != 2) {
+        if (Auth::user()->id_rol != 2) {
             return redirect()->route('dashboard')->with('error', 'No tienes permiso para realizar salidas.');
         }
 
@@ -74,7 +74,7 @@ class MovimientoController extends Controller
         // Registrar movimiento
         Movimiento::create([
             'idProducto' => $producto->idProducto,
-            'idUsuario' => Auth::user()->idUsuario,
+            'id_usuario' => Auth::user()->id_usuario,
             'tipo' => 'salida',
             'cantidad' => $request->cantidad,
         ]);

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nueva Solicitud de Comisión')
+@section('title', 'Registro de Salida por Comisión')
 
 @section('content')
     @include('solicitudes.form', ['solicitud' => null])

@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="dashboard-container">
-    <h1>Mis Solicitudes de Comisión</h1>
+    <h1>Mis Solicitudes de Salida de Comisión</h1>
 
-    <a href="{{ route('solicitudes.create') }}" class="action-button">Nueva Solicitud</a>
+    <a href="{{ route('solicitudes.create') }}" class="action-button">Registrar Solicitud</a>
 
     @if ($solicitudes->isEmpty())
-        <p>No tienes solicitudes registradas.</p>
+        <p>No tienes solicitudes registradas en este momento.</p>
     @else
         <table>
             <thead>
                 <tr>
                     <th>Fecha de Solicitud</th>
-                    <th>Fecha de Salida</th>
-                    <th>Fecha de Regreso</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
                     <th>Motivo</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -26,13 +26,13 @@
                 @foreach ($solicitudes as $solicitud)
                     <tr>
                         <td>{{ $solicitud->fecha_solicitud }}</td>
-                        <td>{{ $solicitud->fecha_salida }}</td>
-                        <td>{{ $solicitud->fecha_regreso }}</td>
+                        <td>{{ $solicitud->fecha_inicio }}</td>
+                        <td>{{ $solicitud->fecha_fin }}</td>
                         <td>{{ $solicitud->motivo }}</td>
                         <td>{{ $solicitud->estado }}</td>
                         <td>
                             <a href="{{ route('solicitudes.show', $solicitud->id) }}" class="action-button">Ver</a>
-                            <a href="{{ route('solicitudes.edit', $solicitud->id) }}" class="action-button">Editar</a>
+                            <a href="{{ route('solicitudes.edit', $solicitud->id) }}" class="action-button">Modificar</a>
                             <form action="{{ route('solicitudes.destroy', $solicitud->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -40,7 +40,7 @@
                             </form>
                         </td>
 
-                    
+
                     </tr>
                 @endforeach
             </tbody>

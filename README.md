@@ -19,7 +19,7 @@
 
 **Datos de acceso:**
 
-**USUARIO ADMINISTRADOR:**
+**USUARIO RECTORIA:**
 Correo: admin@empresa.com
 Contraseña: password
 
@@ -29,8 +29,8 @@ Contraseña: password
 
 ## Datos de Acceso
 
-| CORREO  | CONTRASEÑA | ROL | 
-| ------------- |:-------------:|:-------------:|
-| admin@empresa.com      | password     |ADMINISTRADOR|
-| almacenista@empresa.com      | password     |ALMACENISTA |
+| CORREO  | CONTRASEÑA |     ROL     | 
+| ------------- |:-------------:|:-----------:|
+| admin@empresa.com      | password     |  RECTORIA   |
+| almacenista@empresa.com      | password     | ALMACENISTA |
 

@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Solicitudes de Viáticos')
+@section('title', 'Solicitudes de Pago de Viáticos')
 
 @section('content')
 <div class="dashboard-container">
-    <h1>Solicitudes de Viáticos</h1>
+    <h1>Mis Solicitudes de Pago de Viáticos</h1>
 
-    <a href="{{ route('solicitudes_viaticos.create') }}" class="action-button">Nueva Solicitud de Viático</a>
+    <a href="{{ route('solicitudes_viaticos.create') }}" class="action-button">Registrar Solicitud</a>
 
     @if ($viaticos->isEmpty())
+        <br>
         <p>No hay solicitudes de viáticos registradas.</p>
     @else
         <table>
@@ -29,7 +30,7 @@
                         <td>{{ $viatico->estado }}</td>
                         <td>{{ $viatico->tipo }}</td>
                         <td>
-                            <a href="{{ route('solicitudes_viaticos.edit', $viatico->id) }}" class="action-button">Editar</a>
+                            <a href="{{ route('solicitudes_viaticos.edit', $viatico->id) }}" class="action-button">Modificar</a>
                             <form action="{{ route('solicitudes_viaticos.destroy', $viatico->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

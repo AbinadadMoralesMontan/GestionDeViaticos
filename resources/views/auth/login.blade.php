@@ -144,7 +144,7 @@
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="contrasena" name="contrasena" required>
 
-            <button type="submit">Iniciar</button>
+            <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
 

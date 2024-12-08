@@ -17,15 +17,21 @@ class SolicitudComision extends Model
     protected $fillable = [
         'responsable_id',
         'fecha_solicitud',
-        'fecha_salida',
-        'fecha_regreso',
+        'fecha_inicio',
+        'fecha_fin',
+        'destino',
         'motivo',
+        'monto_hospedaje',
+        'monto_transporte',
+        'monto_alimentacion',
+        'monto_inscripcion',
+        'monto_otros',
         'estado',
         'observaciones',
     ];
 
     public function responsable(){
-        return $this->belongsTo(Usuario::class, 'responsable_id', 'idUsuario');
+        return $this->belongsTo(Usuario::class, 'responsable_id', 'id_usuario');
     }
 
     public function solicitudesViaticos(){

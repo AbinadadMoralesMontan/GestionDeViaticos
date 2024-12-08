@@ -14,6 +14,7 @@ class ComprobanteEntregado extends Model
     protected $fillable = [
         'solicitud_viaticos_id',
         'categoria_gasto',
+        'monto',
         'nombre_archivo',
         'tipo_archivo',
         'contenido',

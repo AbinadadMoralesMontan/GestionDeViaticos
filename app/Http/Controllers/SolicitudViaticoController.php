@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SolicitudViaticoController extends Controller{
-    
+
     public function index(){
         $user = auth()->user();
 
-        if ($user->rol->nombre === 'Administrador') {
+        if ($user->rol->nombre === 'Rectoria') {
             $viaticos = SolicitudViatico::with('solicitudComision')
                 ->where('estado', 'Pendiente')
                 ->paginate(10);
@@ -34,19 +34,19 @@ class SolicitudViaticoController extends Controller{
 
     public function create(){
         $user = auth()->user();
-    
-        if ($user->rol->nombre === 'Administrador') {
-            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')->get();
+
+        if ($user->rol->nombre === 'Rectoria') {
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_inicio', 'fecha_fin', 'motivo', 'destino', 'monto_hospedaje', 'monto_transporte', 'monto_alimentacion', 'monto_inscripcion', 'monto_otros')->get();
         } else {
-            $comisionesQuery = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+            $comisionesQuery = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_inicio', 'fecha_fin', 'motivo', 'destino', 'monto_hospedaje', 'monto_transporte', 'monto_alimentacion', 'monto_inscripcion', 'monto_otros')
                 ->where('responsable_id', Auth::id());
-    
+
             $comisiones = $comisionesQuery->get();
         }
-    
+
         return view('solicitudes_viaticos.create', compact('comisiones'));
     }
-    
+
     public function store(Request $request){
         $request->validate([
             'solicitud_comision_id' => 'required|exists:solicitudes_comision,id',
@@ -62,23 +62,24 @@ class SolicitudViaticoController extends Controller{
         AprobacionFiscalizacion::create([
             'solicitud_viatico_id' => $viatico->id,
             'estado' => 'Pendiente',
-            'fiscalizador_id' => null, 
+            'fiscalizador_id' => null,
         ]);
 
         // Insertar en aprobaciones_tesoreria
         AprobacionTesoreria::create([
             'solicitud_viaticos_id' => $viatico->id,
             'estado' => 'Pendiente',
-            'monto_aprobado' => null, 
+            'monto_aprobado' => null,
         ]);
 
         ComprobanteEntregado::create([
             'solicitud_viaticos_id' => $viatico->id,
-            'categoria_gasto' => 'Sin Categoría', 
-            'nombre_archivo' => null, 
-            'tipo_archivo' => null, 
-            'contenido' => null, 
-            'observaciones' => null, 
+            'categoria_gasto' => $viatico-> categoria_gasto,
+            'monto' => $viatico-> monto,
+            'nombre_archivo' => $viatico-> nombre_archivo,
+            'tipo_archivo' => $viatico-> tipo_archivo,
+            'contenido' => $viatico-> contenido,
+            'observaciones' => $viatico-> observaciones,
         ]);
 
         return redirect()->route('solicitudes_viaticos.index')->with('success', 'Solicitud de viáticos creada exitosamente.');
@@ -88,11 +89,11 @@ class SolicitudViaticoController extends Controller{
 
     public function edit(SolicitudViatico $viatico){
         $user = auth()->user();
-        if ($user->rol->nombre === 'Administrador') {
-            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+        if ($user->rol->nombre === 'Rectoria') {
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_inicio', 'fecha_fin', 'motivo')
                 ->get();
         } else {
-            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_salida', 'fecha_regreso', 'motivo')
+            $comisiones = SolicitudComision::select('id', 'fecha_solicitud', 'fecha_inicio', 'fecha_fin', 'motivo')
                 ->where('responsable_id', Auth::id())
                 ->get();
         }

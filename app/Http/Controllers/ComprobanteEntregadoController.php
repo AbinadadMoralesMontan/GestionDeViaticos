@@ -19,6 +19,7 @@ class ComprobanteEntregadoController extends Controller{
     public function update(Request $request, $id){
         $request->validate([
             'categoria_gasto' => 'required|string|max:255',
+            'monto' => 'nullable|numeric|min:0',
             'observaciones' => 'nullable|string',
             'pdf' => 'nullable|file|mimes:pdf|max:2048', // Validación para PDF
             'xml' => 'nullable|file|mimes:xml|max:2048', // Validación para XML
@@ -32,6 +33,7 @@ class ComprobanteEntregadoController extends Controller{
 
         $comprobante->update([
             'categoria_gasto' => $request->categoria_gasto,
+            'monto' => $request->monto,
             'observaciones' => $request->observaciones,
             'pdf' => $pdfContenido,
             'xml' => $xmlContenido,
@@ -75,5 +77,21 @@ class ComprobanteEntregadoController extends Controller{
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="archivo.pdf"');
     }
+
+    public function create()
+    {
+        return view('comprobantes.create'); // Retorna la vista para crear comprobantes
+    }
+
+    public function destroy($id)
+    {
+        // Lógica para eliminar el comprobante
+        $comprobante = Comprobante::findOrFail($id);
+        $comprobante->delete();
+
+        return redirect()->route('comprobantes.index')->with('success', 'Comprobante eliminado correctamente.');
+    }
+
+
 
 }

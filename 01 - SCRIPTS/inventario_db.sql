@@ -31,7 +31,7 @@ CREATE TABLE `aprobaciones_fiscalizacion` (
   KEY `solicitud_viatico_id` (`solicitud_viatico_id`),
   KEY `fiscalizador_id` (`fiscalizador_id`),
   CONSTRAINT `aprobaciones_fiscalizacion_ibfk_1` FOREIGN KEY (`solicitud_viatico_id`) REFERENCES `solicitudes_viaticos` (`id`),
-  CONSTRAINT `aprobaciones_fiscalizacion_ibfk_2` FOREIGN KEY (`fiscalizador_id`) REFERENCES `usuarios` (`idUsuario`)
+  CONSTRAINT `aprobaciones_fiscalizacion_ibfk_2` FOREIGN KEY (`fiscalizador_id`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `aprobaciones_tesoreria` (
   KEY `solicitud_viaticos_id` (`solicitud_viaticos_id`),
   KEY `tesorero_id` (`tesorero_id`),
   CONSTRAINT `aprobaciones_tesoreria_ibfk_1` FOREIGN KEY (`solicitud_viaticos_id`) REFERENCES `solicitudes_viaticos` (`id`),
-  CONSTRAINT `aprobaciones_tesoreria_ibfk_2` FOREIGN KEY (`tesorero_id`) REFERENCES `usuarios` (`idUsuario`)
+  CONSTRAINT `aprobaciones_tesoreria_ibfk_2` FOREIGN KEY (`tesorero_id`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -209,16 +209,16 @@ DROP TABLE IF EXISTS `movimientos`;
 CREATE TABLE `movimientos` (
   `idMovimiento` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idProducto` int(10) unsigned NOT NULL,
-  `idUsuario` int(10) unsigned NOT NULL,
+  `id_usuario` int(10) unsigned NOT NULL,
   `tipo` enum('entrada','salida') NOT NULL,
   `cantidad` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`idMovimiento`),
   KEY `movimientos_idproducto_foreign` (`idProducto`),
-  KEY `movimientos_idusuario_foreign` (`idUsuario`),
+  KEY `movimientos_id_usuario_foreign` (`id_usuario`),
   CONSTRAINT `movimientos_idproducto_foreign` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
-  CONSTRAINT `movimientos_idusuario_foreign` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+  CONSTRAINT `movimientos_id_usuario_foreign` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
@@ -266,17 +266,17 @@ INSERT INTO `productos` VALUES ('6', 'Papa', 'sabrita', '0', '1', '2024-11-02 17
 -- ----------------------------
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
-  `idRol` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_rol` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`idRol`)
+  PRIMARY KEY (`id_rol`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES ('1', 'Administrador', '2024-11-02 07:56:36', '2024-11-02 07:56:36');
+INSERT INTO `roles` VALUES ('1', 'Rectoria', '2024-11-02 07:56:36', '2024-11-02 07:56:36');
 INSERT INTO `roles` VALUES ('2', 'Empleado', '2024-11-02 07:56:36', '2024-11-02 07:56:36');
 INSERT INTO `roles` VALUES ('3', 'Fiscalizacion', '2024-12-06 01:52:51', '2024-12-06 01:52:55');
 INSERT INTO `roles` VALUES ('4', 'Tesoreria', '2024-12-06 01:52:59', '2024-12-03 01:53:02');
@@ -298,7 +298,7 @@ CREATE TABLE `solicitudes_comision` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `responsable_id` (`responsable_id`),
-  CONSTRAINT `solicitudes_comision_ibfk_1` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`idUsuario`)
+  CONSTRAINT `solicitudes_comision_ibfk_1` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -335,7 +335,7 @@ INSERT INTO `solicitudes_viaticos` VALUES ('8', '7', '7500.00', 'SOLICITUD PARA 
 -- ----------------------------
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
-  `idUsuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `apellido_paterno` varchar(100) NOT NULL,
   `apellido_materno` varchar(100) NOT NULL,
@@ -344,15 +344,15 @@ CREATE TABLE `usuarios` (
   `correo` varchar(50) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
   `area` enum('Empleado','Fiscalizacion','Tesoreria') NOT NULL,
-  `idRol` int(10) unsigned NOT NULL,
+  `id_rol` int(10) unsigned NOT NULL,
   `estatus` tinyint(1) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`idUsuario`),
+  PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `usuarios_correo_unique` (`correo`),
-  KEY `usuarios_idrol_foreign` (`idRol`),
-  CONSTRAINT `usuarios_idrol_foreign` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`)
+  KEY `usuarios_id_rol_foreign` (`id_rol`),
+  CONSTRAINT `usuarios_id_rol_foreign` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
