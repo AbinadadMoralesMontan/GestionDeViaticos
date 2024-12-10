@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
+class ComposerStaticInit4df3b4653be81bd0416a619fb1b75e17
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -335,8 +335,8 @@ class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -526,8 +526,6 @@ class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
         'App\\Models\\AprobacionFiscalizacion' => __DIR__ . '/../..' . '/app/Models/AprobacionFiscalizacion.php',
         'App\\Models\\AprobacionTesoreria' => __DIR__ . '/../..' . '/app/Models/AprobacionTesoreria.php',
         'App\\Models\\ComprobanteEntregado' => __DIR__ . '/../..' . '/app/Models/ComprobanteEntregado.php',
-        'App\\Models\\Movimiento' => __DIR__ . '/../..' . '/app/Models/Movimiento.php',
-        'App\\Models\\Producto' => __DIR__ . '/../..' . '/app/Models/Producto.php',
         'App\\Models\\Rol' => __DIR__ . '/../..' . '/app/Models/Rol.php',
         'App\\Models\\SolicitudComision' => __DIR__ . '/../..' . '/app/Models/SolicitudComision.php',
         'App\\Models\\SolicitudViatico' => __DIR__ . '/../..' . '/app/Models/SolicitudViatico.php',
@@ -2959,10 +2957,12 @@ class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
         'League\\CommonMark\\CommonMarkConverter' => __DIR__ . '/..' . '/league/commonmark/src/CommonMarkConverter.php',
         'League\\CommonMark\\ConverterInterface' => __DIR__ . '/..' . '/league/commonmark/src/ConverterInterface.php',
+        'League\\CommonMark\\Delimiter\\Bracket' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Bracket.php',
         'League\\CommonMark\\Delimiter\\Delimiter' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Delimiter.php',
         'League\\CommonMark\\Delimiter\\DelimiterInterface' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/DelimiterInterface.php',
         'League\\CommonMark\\Delimiter\\DelimiterParser' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/DelimiterParser.php',
         'League\\CommonMark\\Delimiter\\DelimiterStack' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/DelimiterStack.php',
+        'League\\CommonMark\\Delimiter\\Processor\\CacheableDelimiterProcessorInterface' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Processor/CacheableDelimiterProcessorInterface.php',
         'League\\CommonMark\\Delimiter\\Processor\\DelimiterProcessorCollection' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Processor/DelimiterProcessorCollection.php',
         'League\\CommonMark\\Delimiter\\Processor\\DelimiterProcessorCollectionInterface' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Processor/DelimiterProcessorCollectionInterface.php',
         'League\\CommonMark\\Delimiter\\Processor\\DelimiterProcessorInterface' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Processor/DelimiterProcessorInterface.php',
@@ -3216,6 +3216,7 @@ class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
         'League\\CommonMark\\Parser\\MarkdownParserState' => __DIR__ . '/..' . '/league/commonmark/src/Parser/MarkdownParserState.php',
         'League\\CommonMark\\Parser\\MarkdownParserStateInterface' => __DIR__ . '/..' . '/league/commonmark/src/Parser/MarkdownParserStateInterface.php',
         'League\\CommonMark\\Parser\\ParserLogicException' => __DIR__ . '/..' . '/league/commonmark/src/Parser/ParserLogicException.php',
+        'League\\CommonMark\\Reference\\MemoryLimitedReferenceMap' => __DIR__ . '/..' . '/league/commonmark/src/Reference/MemoryLimitedReferenceMap.php',
         'League\\CommonMark\\Reference\\Reference' => __DIR__ . '/..' . '/league/commonmark/src/Reference/Reference.php',
         'League\\CommonMark\\Reference\\ReferenceInterface' => __DIR__ . '/..' . '/league/commonmark/src/Reference/ReferenceInterface.php',
         'League\\CommonMark\\Reference\\ReferenceMap' => __DIR__ . '/..' . '/league/commonmark/src/Reference/ReferenceMap.php',
@@ -6524,9 +6525,9 @@ class ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitfaed01fa964d3d4af1e0ef34555ae1c2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4df3b4653be81bd0416a619fb1b75e17::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4df3b4653be81bd0416a619fb1b75e17::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit4df3b4653be81bd0416a619fb1b75e17::$classMap;
 
         }, null, ClassLoader::class);
     }
