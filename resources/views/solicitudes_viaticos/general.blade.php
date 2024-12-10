@@ -4,9 +4,10 @@
 
 @section('content')
 <div class="dashboard-container">
-    <h1>Solicitudes de Viáticos</h1>
+    <h1>Solicitudes Pago de Viáticos</h1>
 
     @if ($solicitudesViaticos->isEmpty())
+        <br>
         <p>No hay solicitudes de viáticos registradas.</p>
     @else
         <table>

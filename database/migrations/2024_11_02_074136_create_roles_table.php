@@ -9,17 +9,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->increments('idUsuario');
+            $table->increments('id_usuario');
             $table->string('nombre', 100);
             $table->string('correo', 50)->unique();
             $table->string('contrasena', 255); // Usaremos bcrypt, así que aumenta el tamaño
-            $table->unsignedInteger('idRol');
+            $table->unsignedInteger('id_rol');
             $table->boolean('estatus')->default(1); // 1 activo, 0 inactivo
             $table->rememberToken();
             $table->timestamps();
 
             // Clave foránea
-            $table->foreign('idRol')->references('idRol')->on('roles');
+            $table->foreign('id_rol')->references('id_rol')->on('roles');
         });
     }
 

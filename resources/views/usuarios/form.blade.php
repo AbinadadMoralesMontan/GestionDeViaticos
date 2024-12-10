@@ -1,6 +1,6 @@
 <div class="form-container">
-    <h1>{{ isset($usuario) ? 'Editar Usuario' : 'Crear Usuario' }}</h1>
-    <form action="{{ isset($usuario) ? route('usuarios.update', $usuario->idUsuario) : route('usuarios.store') }}" method="POST">
+    <h1>{{ isset($usuario) ? 'Modificar Empleado' : 'Registrar Empleado' }}</h1>
+    <form action="{{ isset($usuario) ? route('usuarios.update', $usuario->id_usuario) : route('usuarios.store') }}" method="POST">
         @csrf
         @if (isset($usuario))
             @method('PUT')
@@ -19,7 +19,7 @@
         <input type="text" id="apellido_materno" name="apellido_materno" class="form-control" required value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
 
         <!-- Correo -->
-        <label for="correo">Correo:</label>
+        <label for="correo">Correo Institucional:</label>
         <input type="email" id="correo" name="correo" class="form-control" required value="{{ old('correo', $usuario->correo ?? '') }}">
 
         <!-- Contraseña (Solo en creación) -->
@@ -47,33 +47,37 @@
             <option value="Banorte" {{ old('banco', $usuario->banco ?? '') == 'Banorte' ? 'selected' : '' }}>Banorte</option>
             <option value="Inbursa" {{ old('banco', $usuario->banco ?? '') == 'Inbursa' ? 'selected' : '' }}>Inbursa</option>
             <option value="Banco Azteca" {{ old('banco', $usuario->banco ?? '') == 'Banco Azteca' ? 'selected' : '' }}>Banco Azteca</option>
-            <option value="Otros" {{ old('banco', $usuario->banco ?? '') == 'Otros' ? 'selected' : '' }}>Otros</option>
         </select>
 
         <!-- Número de Cuenta -->
         <label for="numero_cuenta">Número de Cuenta:</label>
         <input type="text" id="numero_cuenta" name="numero_cuenta" class="form-control" value="{{ old('numero_cuenta', $usuario->numero_cuenta ?? '') }}" placeholder="Ingrese el número de cuenta">
 
-        <!-- Área -->
-        <label for="area">Área:</label>
-        <select id="area" name="area" class="form-control" required>
-            <option value="Empleado" {{ old('area', $usuario->area ?? '') == 'Empleado' ? 'selected' : '' }}>Empleado</option>
-            <option value="Fiscalizacion" {{ old('area', $usuario->area ?? '') == 'Fiscalizacion' ? 'selected' : '' }}>Fiscalización</option>
-            <option value="Tesoreria" {{ old('area', $usuario->area ?? '') == 'Tesoreria' ? 'selected' : '' }}>Tesorería</option>
-        </select>
-
         <!-- Rol -->
-        <label for="idRol">Rol:</label>
-        <select id="idRol" name="idRol" class="form-control" required>
+        <label for="id_rol">Rol:</label>
+        <select id="id_rol" name="id_rol" class="form-control" required>
             @foreach ($roles as $rol)
-                <option value="{{ $rol->idRol }}" {{ old('idRol', $usuario->idRol ?? '') == $rol->idRol ? 'selected' : '' }}>
+                <option value="{{ $rol->id_rol }}" {{ old('id_rol', $usuario->id_rol ?? '') == $rol->id_rol ? 'selected' : '' }}>
                     {{ $rol->nombre }}
                 </option>
             @endforeach
         </select>
 
+        <!-- Departamento -->
+        <label for="departamento">Departamento:</label>
+        <select id="departamento" name="departamento" class="form-control" required>
+            <option value="Académico" {{ old('departamento', $usuario->departamento ?? '') == 'Académico' ? 'selected' : '' }}>Académico</option>
+            <option value="Administrativo" {{ old('departamento', $usuario->departamento ?? '') == 'Administrativo' ? 'selected' : '' }}>Administrativo</option>
+            <option value="Servicios Estudiantiles" {{ old('departamento', $usuario->departamento ?? '') == 'Servicios Estudiantiles' ? 'selected' : '' }}>Servicios Estudiantiles</option>
+            <option value="Investigación" {{ old('departamento', $usuario->departamento ?? '') == 'Investigación' ? 'selected' : '' }}>Investigación</option>
+        </select>
+
+        <!-- Cargo -->
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" class="form-control" required value="{{ old('cargo', $usuario->cargo ?? '') }}">
+
         <!-- Botón Guardar -->
-        <button type="submit" class="btn btn-primary btn-block">{{ isset($usuario) ? 'Actualizar' : 'Guardar' }}</button>
+        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
     </form>
 </div>
 

@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller;
 
 class ProductoController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -102,7 +102,7 @@ class ProductoController extends Controller
 
         Movimiento::create([
             'idProducto' => $producto->idProducto,
-            'idUsuario' => Auth::id(),
+            'id_usuario' => Auth::id(),
             'cantidad' => $request->cantidad,
             'tipo' => 'entrada',
         ]);

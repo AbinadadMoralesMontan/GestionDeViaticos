@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function rol()
     {
-        return $this->belongsTo(Rol::class, 'idRol'); // Ajusta 'idRol' si es diferente en tu base de datos
+        return $this->belongsTo(Rol::class, 'id_rol'); // Ajusta 'id_rol' si es diferente en tu base de datos
     }
 
 }

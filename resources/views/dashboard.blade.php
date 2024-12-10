@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="dashboard-container">
-        <h1>Bienvenido, {{ Auth::user()->nombre }}</h1>
+        <h1>Bienvenido, {{ Auth::user()->nombre }} {{ Auth::user()->apellido_paterno }} {{ Auth::user()->apellido_materno }} </h1>
 
         <div class="dashboard-options">
             @foreach ($dashboardOptions as $option)

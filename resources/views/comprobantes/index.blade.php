@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Comprobantes Entregados')
+@section('title', 'Comprobantes de Víáticos')
 
 @section('content')
 <div class="dashboard-container">
-    <h1>Comprobantes Entregados</h1>
+    <h1>Comprobantes de Viáticos</h1>
+
+    <a href="{{ route('comprobantes.create') }}" class="action-button">Entregar Comprobante</a>
 
     @if ($comprobantes->isEmpty())
         <p>No hay comprobantes entregados registrados.</p>
@@ -34,7 +36,12 @@
                                 <a href="{{ route('comprobantes.downloadXml', $comprobante->id) }}" class="action-button">Descargar XML</a>
                             @endif
 
-                            <a href="{{ route('comprobantes.edit', $comprobante->id) }}" class="action-button">Editar</a>
+                            <a href="{{ route('comprobantes.edit', $comprobante->id) }}" class="action-button">Modificar</a>
+                                <form action="{{ route('comprobantes.destroy', $comprobante->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="action-button delete">Eliminar</button>
+                                </form>
                         </td>
                     </tr>
                 @endforeach

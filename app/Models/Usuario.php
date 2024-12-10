@@ -9,20 +9,21 @@ class Usuario extends Authenticatable
 {
     use Notifiable;
 
-    protected $primaryKey = 'idUsuario'; 
-    protected $table = 'usuarios'; 
+    protected $primaryKey = 'id_usuario';
+    protected $table = 'usuarios';
 
     protected $fillable = [
         'nombre',
-        'apellido_paterno',  
-        'apellido_materno',  
-        'banco',             
-        'numero_cuenta',     
+        'apellido_paterno',
+        'apellido_materno',
+        'banco',
+        'numero_cuenta',
+        'departamento',
+        'cargo',
         'correo',
         'contrasena',
-        'idRol',
+        'id_rol',
         'estatus',
-        'area',              
     ];
 
     protected $hidden = [
@@ -35,7 +36,7 @@ class Usuario extends Authenticatable
      */
     public function rol()
     {
-        return $this->belongsTo(Rol::class, 'idRol');
+        return $this->belongsTo(Rol::class, 'id_rol');
     }
 
     /**
@@ -43,6 +44,6 @@ class Usuario extends Authenticatable
      */
     public function movimientos()
     {
-        return $this->hasMany(Movimiento::class, 'idUsuario');
+        return $this->hasMany(Movimiento::class, 'id_usuario');
     }
 }

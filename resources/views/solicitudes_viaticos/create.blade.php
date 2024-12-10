@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nueva Solicitud de Viático')
+@section('title', 'Registro Solicitud de Pago de Viáticos')
 
 @section('content')
     @include('solicitudes_viaticos.form')
